@@ -162,13 +162,13 @@ begin
     --   end loop;
 
         --4 read and display output values
-        ioread (read, readdata, address, "0111010", readdata_value);
-        ioread (read, readdata, address, "0111011", readdata_value);
-        ioread (read, readdata, address, "0111100", readdata_value);
-        ioread (read, readdata, address, "0111101", readdata_value);
-        ioread (read, readdata, address, "0111110", readdata_value);
-        ioread (read, readdata, address, "0111111", readdata_value);
-        ioread (read, readdata, address, "1000000", readdata_value);
+       --ioread (read, readdata, address, "0111010", readdata_value);
+       --ioread (read, readdata, address, "0111011", readdata_value);
+       --ioread (read, readdata, address, "0111100", readdata_value);
+       --ioread (read, readdata, address, "0111101", readdata_value);
+       --ioread (read, readdata, address, "0111110", readdata_value);
+       --ioread (read, readdata, address, "0111111", readdata_value);
+       --ioread (read, readdata, address, "1000000", readdata_value);
         wait ;
     end process;
 end architecture arch;
