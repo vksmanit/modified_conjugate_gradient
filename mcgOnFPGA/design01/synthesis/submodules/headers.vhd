@@ -1,0 +1,93 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+package headers is 
+
+    type tState is (stIDLE,
+stSTART,
+stPROC_AP_ROW1,
+stPROC_AP_ROW2,
+stPROC_AP_ROW3,
+stPROC_AP_ROW4, 
+stPROC_AP_ROW5, 
+stPROC_AP_ROW6, 
+stPROC_AP_ROW7,
+stPROC_AP_RESULT_APxb_0,
+stPROC_AP_RESULT_APxb_1,
+stPROC_AP_RESULT_APxb_2,
+stPROC_AP_RESULT_APxb_3,
+stPROC_AP_RESULT_APxb_4, 
+stPROC_AP_RESULT_APxb_5,
+stPROC_AP_RESULT_APxb_6,
+stCalculate_alpha_s1,
+stCalculate_alpha_s2,
+stCalculate_alpha_s3,
+stCalculate_alpha_s4,
+stCalculate_alpha_num_arg1_read,
+stCalculate_alpha_num_arg2_read,
+stCalculate_alpha_dem_arg1_read,
+stCalculate_alpha_dem_arg2_read,
+stCalculate_alpha_num_and_dem_s1,
+stCalculate_alpha_num_and_dem_s2,
+stCalculate_alpha_num_and_dem_s3,
+stCalculate_alpha_begin,
+stCalculate_alpha_end,
+st_alpha_read,
+st_alpha_mult_p_s1,
+stTEMP1, 
+stREAD_alpha_mult_p,
+stCalculate_x_new,
+stTEMP2,
+st_alpha_mult_AP_s1,
+st_alpha_mult_AP_s2,
+stTEMP3,
+stCalculate_r_new,
+stCalculate_r_new_s1,
+stCalculate_r_new_s2,
+--stCalculate_r_new_s2,
+stCalculate_beta_s1,
+stCalculate_beta_s2,
+stCalculate_beta_s3,
+stRead_beta_num_arg1,
+stRead_beta_num_arg2,
+stCalculate_beta_num_s1,
+stCalculate_beta_num_s2,
+stTEMP4,
+stCalculate_beta,
+stRead_beta_s1,
+stCalculate_p_s1,
+stCalculate_p_s2,
+stTEMP5,stTEMP6,
+stCalculate_p_s3,
+stCalculate_p,
+stREAD_p, 
+stCalculate_r_minus_rold,
+stREAD_r_minus_rold_s1,
+stREAD_r_minus_rold_s2,
+stABS_r_minus_rold_s1, 
+stABS_r_minus_rold_s2, 
+stFind_max_in_abs, 
+stCompare_max_with_epsilon, 
+stFINISH,
+stTEMP7,stTEMP8,stTEMP9,stTEMP10, stTEMP11,stTEMP12
+);
+
+
+--
+--                stTEMP1, stTEMP11, stTEMP21, stTEMP31,stTEMP41, stTEMP51,
+--                stTEMP2, stTEMP12, stTEMP22, stTEMP32,stTEMP42, stTEMP52,
+--                stTEMP3, stTEMP13, stTEMP23, stTEMP33,stTEMP43, stTEMP53,
+--                stTEMP4, stTEMP14, stTEMP24, stTEMP34,stTEMP44, stTEMP54,
+--                stTEMP5, stTEMP15, stTEMP25, stTEMP35,stTEMP45, stTEMP55,
+--                stTEMP6, stTEMP16, stTEMP26, stTEMP36,stTEMP46, stTEMP56,
+--                stTEMP7, stTEMP17, stTEMP27, stTEMP37,stTEMP47, stTEMP57,
+--                stTEMP8, stTEMP18, stTEMP28, stTEMP38,stTEMP48, stTEMP58,
+--                stTEMP9, stTEMP19, stTEMP29, stTEMP39,stTEMP49, stTEMP59,
+--                stTEMP10,stTEMP20, stTEMP30, stTEMP40,stTEMP50, stTEMP60,
+--				stPROC_ROW3, stPROC_ROW4, stRESULT_OUT1, stRESULT_OUT2, stRESULT_OUT3, stRESULT_OUT4,stFINISH); 
+                    -- stSTART_MULT_AND_ADD, st_WRITING_IN_RAM, stFINISH);
+    subtype std_logic_vector_32 is std_logic_vector(31 downto 0);
+    type dim1 is array (0 to 6) of std_logic_vector_32;
+    type matrix is array (0 to 6) of dim1;
+
+end package headers;

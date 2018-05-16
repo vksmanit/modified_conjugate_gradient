@@ -112,20 +112,20 @@ architecture arch of top is
 
 
     -- signal represeting the connection of multiplier and adder chain require for 7x7 matrix and 7x1 vector
-    signal mult1_reg1 : std_logic_vector_32 := x"00000000";    signal mult1_out_add1_in : std_logic_vector_32 ;
-    signal mult1_reg2 : std_logic_vector_32 := x"00000000";    signal mult2_out_add1_in : std_logic_vector_32 ;
-    signal mult2_reg1 : std_logic_vector_32 := x"00000000";    signal mult3_out_add2_in : std_logic_vector_32 ;
-    signal mult2_reg2 : std_logic_vector_32 := x"00000000";    signal mult4_out_add2_in : std_logic_vector_32 ;
-    signal mult3_reg1 : std_logic_vector_32 := x"00000000";    signal mult5_out_add3_in : std_logic_vector_32 ;
-    signal mult3_reg2 : std_logic_vector_32 := x"00000000";    signal mult6_out_add3_in : std_logic_vector_32 ;
-    signal mult4_reg1 : std_logic_vector_32 := x"00000000";    signal mult7_out_add4_in : std_logic_vector_32 ;
-    signal mult4_reg2 : std_logic_vector_32 := x"00000000";    signal mult8_out_add4_in : std_logic_vector_32 ;
-    signal mult5_reg1 : std_logic_vector_32 := x"00000000";    signal add1_out_add5_in : std_logic_vector_32 ;
-    signal mult5_reg2 : std_logic_vector_32 := x"00000000";    signal add2_out_add5_in : std_logic_vector_32 ;
-    signal mult6_reg1 : std_logic_vector_32 := x"00000000";    signal add3_out_add6_in : std_logic_vector_32 ;
-    signal mult6_reg2 : std_logic_vector_32 := x"00000000";    signal add4_out_add6_in : std_logic_vector_32 ;
-    signal mult7_reg1 : std_logic_vector_32 := x"00000000";    signal add5_out_add7_in : std_logic_vector_32 ;
-    signal mult7_reg2 : std_logic_vector_32 := x"00000000";    signal add6_out_add7_in : std_logic_vector_32 ;
+    signal mult1_reg1 : std_logic_vector_32 ;    signal mult1_out_add1_in : std_logic_vector_32 ; -- := x"00000000"
+    signal mult1_reg2 : std_logic_vector_32 ;    signal mult2_out_add1_in : std_logic_vector_32 ; -- := x"00000000"
+    signal mult2_reg1 : std_logic_vector_32 ;    signal mult3_out_add2_in : std_logic_vector_32 ; -- := x"00000000"
+    signal mult2_reg2 : std_logic_vector_32 ;    signal mult4_out_add2_in : std_logic_vector_32 ; -- := x"00000000"
+    signal mult3_reg1 : std_logic_vector_32 ;    signal mult5_out_add3_in : std_logic_vector_32 ; -- := x"00000000"
+    signal mult3_reg2 : std_logic_vector_32 ;    signal mult6_out_add3_in : std_logic_vector_32 ; -- := x"00000000"
+    signal mult4_reg1 : std_logic_vector_32 ;    signal mult7_out_add4_in : std_logic_vector_32 ; -- := x"00000000"
+    signal mult4_reg2 : std_logic_vector_32 ;    signal mult8_out_add4_in : std_logic_vector_32 ; -- := x"00000000"
+    signal mult5_reg1 : std_logic_vector_32 ;    signal add1_out_add5_in : std_logic_vector_32 ;  -- := x"00000000"
+    signal mult5_reg2 : std_logic_vector_32 ;    signal add2_out_add5_in : std_logic_vector_32 ;  -- := x"00000000"
+    signal mult6_reg1 : std_logic_vector_32 ;    signal add3_out_add6_in : std_logic_vector_32 ;  -- := x"00000000"
+    signal mult6_reg2 : std_logic_vector_32 ;    signal add4_out_add6_in : std_logic_vector_32 ;  -- := x"00000000"
+    signal mult7_reg1 : std_logic_vector_32 ;    signal add5_out_add7_in : std_logic_vector_32 ;  -- := x"00000000"
+    signal mult7_reg2 : std_logic_vector_32 ;    signal add6_out_add7_in : std_logic_vector_32 ;  -- := x"00000000"
     signal add7_out : std_logic_vector_32;
     signal mult8_reg1 : std_logic_vector_32 := x"00000000";    
     signal mult8_reg2 : std_logic_vector_32 := x"00000000";  --  signal add6_out : std_logic_vector_32;
@@ -548,8 +548,8 @@ begin
                         mult5_reg1 <= A(6)(4); mult5_reg2 <= p(4);
                         mult6_reg1 <= A(6)(5); mult6_reg2 <= p(5);
                         mult7_reg1 <= A(6)(6); mult7_reg2 <= p(6);
-                       -- if (count_counter = "11010") then -- 
-							   if (count_counter >= "11010") then -- 
+                       -- if (count_counter = "11010") then -- TODO
+							if (count_counter >= "11001") then -- TODO
                             reset_counter <= '1';
                             state <= stPROC_AP_RESULT_APxb_0;
                         end if ;
@@ -569,8 +569,8 @@ begin
                         state <= stPROC_AP_RESULT_APxb_3;
                     when stPROC_AP_RESULT_APxb_3 => 
                         Ap(3) <= add7_out;
-                        state <= stTEMP7;
-                    when stTEMP7 =>
+                        --state <= stTEMP7;
+                   -- when stTEMP7 =>
                         state <= stPROC_AP_RESULT_APxb_4;
                     when stPROC_AP_RESULT_APxb_4 => 
                         Ap(4) <= add7_out;
@@ -586,7 +586,7 @@ begin
 -- r0*p0 + r1*p1 + r2*p2(alpha_num_arg1) entered to adder_and_multiplier chain 
 -- ===============================================================================================
                         
-                    when stCalculate_alpha_s1 =>  -- : how we can integrate with mcg_index
+                    when stCalculate_alpha_s1 =>  --TODO : how we can integrate with mcg_index
                         mult1_reg1 <= r(0);         mult1_reg2 <= p(0);
                         mult2_reg1 <= r(1);         mult2_reg2 <= p(1);
                         mult3_reg1 <= r(2);         mult3_reg2 <= p(2);
@@ -632,7 +632,7 @@ begin
                         mult5_reg1 <= x"00000000";  mult5_reg2 <= x"00000000";
                         mult6_reg1 <= x"00000000";  mult6_reg2 <= x"00000000";
                         mult7_reg1 <= x"00000000";  mult7_reg2 <= x"00000000";
-                        if (count_counter >= "11010") then --  after 26 clock cycle our result comes
+                        if (count_counter >= "11010") then -- todo after 26 clock cycle our result comes
                             reset_counter <= '1';
                             alpha_num_arg1 <= add7_out;
                             state <= stCalculate_alpha_num_arg2_read;
@@ -667,7 +667,7 @@ begin
                         add_sub1_reg1 <= alpha_dem_arg1;
                         add_sub1_reg2 <= alpha_dem_arg2;
                         add_sub_control_for_add_sub1 <= '0';
-                        if (count_counter = "00111") then  -- 
+                        if (count_counter = "00111") then  -- todo
                             reset_counter <= '1';
                             alpha_num <= add_sub1_out;
                             state <= stCalculate_alpha_num_and_dem_s3;
@@ -691,7 +691,7 @@ begin
                         reset_counter <= '0';
                         state <= stCalculate_alpha_end;
                     when stCalculate_alpha_end =>
-                        if (count_counter = "00110") then  --  -- how much cycle a divider takes to give output ??
+                        if (count_counter = "00110") then  -- todo -- how much cycle a divider takes to give output ??
                             reset_counter <= '1';
                             alpha <= div1_out;
                             state <= st_alpha_mult_p_s1;
@@ -705,7 +705,7 @@ begin
                   --      state <= st_alpha_mult_p_s1;
                     when st_alpha_mult_p_s1 => 
 -- ===============================================================================================
--- alpha and p is given to mult_for_alpha_and_beta_01 unit to calculate alpha * p -->  : how to handle vectors here --> DONE
+-- alpha and p is given to mult_for_alpha_and_beta_01 unit to calculate alpha * p --> todo : how to handle vectors here --> DONE
 -- ===============================================================================================
                         mult_for_alpha_and_beta_00_reg1 <= alpha;
                         mult_for_alpha_and_beta_00_reg2 <= p(0);
@@ -721,10 +721,10 @@ begin
                         mult_for_alpha_and_beta_05_reg2 <= p(5);
                         mult_for_alpha_and_beta_06_reg1 <= alpha;
                         mult_for_alpha_and_beta_06_reg2 <= p(6);
-                        reset_counter <= '0'; --
+                        reset_counter <= '0'; --TODO
                         state <= stTEMP1;
                     when stTEMP1 => 
-                        if (count_counter = "00101") then  --  : after how many cycle after multipler is giving output
+                        if (count_counter = "00101") then  -- todo : after how many cycle after multipler is giving output
                             reset_counter <= '1';
  --                           state <= stCalculate_x_new;
                             state <= stREAD_alpha_mult_p;
@@ -739,7 +739,7 @@ begin
                         alpha_mult_p(6) <= mult_for_alpha_and_beta_06_out;
                         state <= stCalculate_x_new;
 -- ===============================================================================================
--- Calculate then x_new, which x = x + alpha * p; --  : what about vector
+-- Calculate then x_new, which x = x + alpha * p; -- todo : what about vector
 -- ===============================================================================================
                     when stCalculate_x_new => 
                         add_sub0_reg1 <= x(0);
@@ -766,7 +766,7 @@ begin
                         reset_counter <= '0'; 
                         state <= stTEMP2;
                     when stTEMP2 => 
-                        if (count_counter = "00110") then  --
+                        if (count_counter = "00110") then  --TODO
                             reset_counter <= '1';
                             state <= st_alpha_mult_AP_s1 ;
                         end if;
@@ -799,7 +799,7 @@ begin
                         reset_counter <= '0';
                         state <= st_alpha_mult_AP_s2;
                     when st_alpha_mult_AP_s2 => 
-                        if (count_counter = "00100") then --
+                        if (count_counter = "00100") then --todo
                             reset_counter <= '1';
                             state <= stTEMP3;
                         end if ;
@@ -816,7 +816,7 @@ begin
                         alpha_mult_Ap(6) <= mult_for_alpha_and_beta_06_out;
                         state <= stCalculate_r_new_s1;
 -- ===============================================================================================
--- Calculate then r_new, which r = r - alpha * Ap; --  : what about vector --> DONE
+-- Calculate then r_new, which r = r - alpha * Ap; -- todo : what about vector --> DONE
 -- ===============================================================================================
                     when stCalculate_r_new_s1 => 
                         rold <= r ; -- store value of r to rold to calculate the error 
@@ -844,7 +844,7 @@ begin
                         reset_counter <= '0' ;
                         state <= stCalculate_r_new_s2;
                     when stCalculate_r_new_s2 => 
-                        if (count_counter = "00110") then --  
+                        if (count_counter = "00110") then -- TODO 
                             reset_counter <= '1';
                             state <= stCalculate_beta_s1;
                         end if;
@@ -853,7 +853,7 @@ begin
 -- Read r_new form add_sub units  
 -- also, r0 * Ap0 + r1 *Ap1 + r2 * Ap2 (beta_num_arg1) entered into adder_and_multiplier chain 
 -- ===============================================================================================
-                    when stCalculate_beta_s1 =>  
+                    when stCalculate_beta_s1 =>  --TODO : how we can integrate with mcg_index
                         r(0) <= add_sub0_out;
                         r(1) <= add_sub1_out;
                         r(2) <= add_sub2_out;
@@ -889,7 +889,7 @@ begin
 -- hence avoiding calculation and saving some clock cycle
 -- ===============================================================================================
                     when stCalculate_beta_s3 =>
-                        if (count_counter = "11001") then -- 26 cycles 
+                        if (count_counter = "11001") then --todo 26 cycles 
                             reset_counter <= '1';
                             state <= stRead_beta_num_arg1;
                         end if;
@@ -912,7 +912,7 @@ begin
                         reset_counter <= '0'; 
                         state <= stCalculate_beta_num_s2;
                     when stCalculate_beta_num_s2 => 
-                        if (count_counter = "00110") then  --  
+                        if (count_counter = "00110") then  -- todo 
                             reset_counter <= '1';
                             state <= stTEMP4;
                         end if;
@@ -931,7 +931,7 @@ begin
                         reset_counter <= '0';
                         state <= stRead_beta_s1;
                     when stRead_beta_s1 => 
-                        if (count_counter = "00101") then  --  After 5 cycle divisor get result
+                        if (count_counter = "00101") then  -- todo : after how much cycle divisor get result
                             reset_counter <= '1';
                             state <= stTEMP5;
                         end if ;
@@ -942,7 +942,7 @@ begin
                             beta <= div1_out;
                             state <= stCalculate_p_s1;
 -- ===============================================================================================
--- calulate p_new (here p); p = r + beta * p;  --  : what about vectors 
+-- calulate p_new (here p); p = r + beta * p;  -- todo : what about vectors 
 -- beta and p is given input to mult_for_alpha_and_beta_01 unit
 -- ===============================================================================================
                     when stCalculate_p_s1 => 
@@ -963,7 +963,7 @@ begin
                         reset_counter <= '0';
                         state <= stCalculate_p_s2;
                     when stCalculate_p_s2 => 
-                        if (count_counter = "00100") then  --  : 5 cycle after multiplier is giving output -- verify ???
+                        if (count_counter = "00100") then  -- todo : 5 cycle after multiplier is giving output -- verify ???
                             reset_counter <= '1';
                             state <= stTEMP6;
                         end if ;
@@ -1004,7 +1004,7 @@ begin
                         reset_counter <= '0';
                         state <= stCalculate_p;
                     when stCalculate_p => 
-                        if (count_counter = "00110") then  --  : 7 cycles 
+                        if (count_counter = "00110") then  -- todo : 7 cycles 
                             reset_counter <= '1';
                             state <= stREAD_p;
                         end if ;
