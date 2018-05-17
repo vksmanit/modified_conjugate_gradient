@@ -188,13 +188,13 @@ architecture arch of top is
     signal max_finder_input6 : std_logic_vector_32;
 	signal max_finder_output : std_logic_vector_32;
     -- signals for abs units
-    signal fp_abs0_reg, fp_abs0_out : std_logic_vector_32;
-    signal fp_abs1_reg, fp_abs1_out : std_logic_vector_32;
-    signal fp_abs2_reg, fp_abs2_out : std_logic_vector_32;
-    signal fp_abs3_reg, fp_abs3_out : std_logic_vector_32;
-    signal fp_abs4_reg, fp_abs4_out : std_logic_vector_32;
-    signal fp_abs5_reg, fp_abs5_out : std_logic_vector_32;
-    signal fp_abs6_reg, fp_abs6_out : std_logic_vector_32;
+--    signal fp_abs0_reg, fp_abs0_out : std_logic_vector_32;
+--    signal fp_abs1_reg, fp_abs1_out : std_logic_vector_32;
+--    signal fp_abs2_reg, fp_abs2_out : std_logic_vector_32;
+--    signal fp_abs3_reg, fp_abs3_out : std_logic_vector_32;
+--    signal fp_abs4_reg, fp_abs4_out : std_logic_vector_32;
+--    signal fp_abs5_reg, fp_abs5_out : std_logic_vector_32;
+--    signal fp_abs6_reg, fp_abs6_out : std_logic_vector_32;
 
     --- others signals 
     signal alpha_num_arg1 : std_logic_vector_32;
@@ -265,13 +265,13 @@ begin
                                                    max_finder_output => max_finder_output);
 
 
-   fp_abs0 : fp_abs port map( clock => clk, data => fp_abs0_reg, result => fp_abs0_out);
-   fp_abs1 : fp_abs port map( clock => clk, data => fp_abs1_reg, result => fp_abs1_out);
-   fp_abs2 : fp_abs port map( clock => clk, data => fp_abs2_reg, result => fp_abs2_out);
-   fp_abs3 : fp_abs port map( clock => clk, data => fp_abs3_reg, result => fp_abs3_out);
-   fp_abs4 : fp_abs port map( clock => clk, data => fp_abs4_reg, result => fp_abs4_out);
-   fp_abs5 : fp_abs port map( clock => clk, data => fp_abs5_reg, result => fp_abs5_out);
-   fp_abs6 : fp_abs port map( clock => clk, data => fp_abs6_reg, result => fp_abs6_out);
+--   fp_abs0 : fp_abs port map( clock => clk, data => fp_abs0_reg, result => fp_abs0_out);
+--   fp_abs1 : fp_abs port map( clock => clk, data => fp_abs1_reg, result => fp_abs1_out);
+--   fp_abs2 : fp_abs port map( clock => clk, data => fp_abs2_reg, result => fp_abs2_out);
+--   fp_abs3 : fp_abs port map( clock => clk, data => fp_abs3_reg, result => fp_abs3_out);
+--   fp_abs4 : fp_abs port map( clock => clk, data => fp_abs4_reg, result => fp_abs4_out);
+--   fp_abs5 : fp_abs port map( clock => clk, data => fp_abs5_reg, result => fp_abs5_out);
+--   fp_abs6 : fp_abs port map( clock => clk, data => fp_abs6_reg, result => fp_abs6_out);
 
    P_top_01:  process (clk)
        variable out_data : std_logic_vector_32;
@@ -1065,30 +1065,30 @@ begin
                         r_minus_rold(4) <= add_sub4_out;
                         r_minus_rold(5) <= add_sub5_out;
                         r_minus_rold(6) <= add_sub6_out;
-                        state <= stABS_r_minus_rold_s1;
+                        state <= stABS_r_minus_rold_s2;
 -- ===============================================================================================
 -- Converting r-rold to abs(r-rold); used abs floating point ip 
 -- ===============================================================================================
-                    when stABS_r_minus_rold_s1 => 
-                        fp_abs0_reg <= r_minus_rold(0);
-                        fp_abs1_reg <= r_minus_rold(1);
-                        fp_abs2_reg <= r_minus_rold(2);
-                        fp_abs3_reg <= r_minus_rold(3);
-                        fp_abs4_reg <= r_minus_rold(4);
-                        fp_abs5_reg <= r_minus_rold(5);
-                        fp_abs6_reg <= r_minus_rold(6);
-                        state <= stTEMP10;
-                    when stTEMP10 => 
-                        state <= stABS_r_minus_rold_s2;
+--                    when stABS_r_minus_rold_s1 => 
+--                        fp_abs0_reg <= r_minus_rold(0);
+--                        fp_abs1_reg <= r_minus_rold(1);
+--                        fp_abs2_reg <= r_minus_rold(2);
+--                        fp_abs3_reg <= r_minus_rold(3);
+--                        fp_abs4_reg <= r_minus_rold(4);
+--                        fp_abs5_reg <= r_minus_rold(5);
+--                        fp_abs6_reg <= r_minus_rold(6);
+--                        state <= stTEMP10;
+--                    when stTEMP10 => 
+--                        state <= stABS_r_minus_rold_s2;
 
                     when stABS_r_minus_rold_s2 => 
-                        abs_r_minus_rold(0) <= fp_abs0_out;
-                        abs_r_minus_rold(1) <= fp_abs1_out;
-                        abs_r_minus_rold(2) <= fp_abs2_out;
-                        abs_r_minus_rold(3) <= fp_abs3_out;
-                        abs_r_minus_rold(4) <= fp_abs4_out;
-                        abs_r_minus_rold(5) <= fp_abs5_out;
-                        abs_r_minus_rold(6) <= fp_abs6_out;
+                        abs_r_minus_rold(0) <= '0' & r_minus_rold(0)(30 downto 0);
+                        abs_r_minus_rold(1) <= '0' & r_minus_rold(1)(30 downto 0);
+                        abs_r_minus_rold(2) <= '0' & r_minus_rold(2)(30 downto 0);
+                        abs_r_minus_rold(3) <= '0' & r_minus_rold(3)(30 downto 0);
+                        abs_r_minus_rold(4) <= '0' & r_minus_rold(4)(30 downto 0);
+                        abs_r_minus_rold(5) <= '0' & r_minus_rold(5)(30 downto 0);
+                        abs_r_minus_rold(6) <= '0' & r_minus_rold(6)(30 downto 0);
                         state <= stFind_max_in_abs;
 -- ===============================================================================================
 -- finding max(abs(r-rold)) to get maximum error in r and rold 
@@ -1142,3 +1142,4 @@ begin
         end process;
 
 end architecture arch;
+
